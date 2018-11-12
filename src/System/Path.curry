@@ -12,14 +12,14 @@ module System.Path
 
 import Directory ( doesFileExist, getAbsolutePath )
 import FilePath  ( (</>), searchPathSeparator )
-import List      ( splitOn )
+import List      ( split )
 import System    ( getEnviron )
 
 --- Returns the list of the directories of the environment variable `PATH`.
 dirsInPath :: IO [String]
 dirsInPath = do
   path <- getEnviron "PATH"
-  return $ splitOn [searchPathSeparator] path
+  return $ split (== searchPathSeparator) path
 
 --- Checks whether a file exists in one of the directories
 --- of the environment variable `PATH`.
